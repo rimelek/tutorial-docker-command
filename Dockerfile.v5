@@ -1,0 +1,9 @@
+FROM ubuntu:18.04
+
+COPY src/hello.sh /
+
+RUN chmod +x /hello.sh
+
+SHELL ["/bin/bash", "-c"]
+
+CMD "/hello.sh"

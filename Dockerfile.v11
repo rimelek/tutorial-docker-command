@@ -1,0 +1,11 @@
+FROM ubuntu:18.04
+
+COPY src/hello-bash.sh /hello.sh
+
+RUN ["chmod", "+x", "/hello.sh"]
+
+SHELL ["/bin/bash", "-c"]
+
+ENTRYPOINT ["/hello.sh"]
+
+CMD ["my", "friend"]
