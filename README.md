@@ -1,6 +1,7 @@
 # Building the main process inside Docker container
 
-This source code was created for a Hungarian [Youtube tutorial](https://youtu.be/KWyNaEUw3W8)It demonstrates who you can build the main process (the first process with 1 as PID) inside a Docker container using SHELL, ENTRYPOINT and CMD.
+This source code was created for a Hungarian [Youtube tutorial](https://youtu.be/KWyNaEUw3W8)
+It demonstrates how you can build the main process (the first process with 1 as PID) inside a Docker container using SHELL, ENTRYPOINT and CMD.
 
 Each Dockerfile has a version number. You can run the tests using [test.sh](test.sh) and passing the version as an argument:
 
