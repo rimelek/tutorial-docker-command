@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-image="localhost/command"
+source ./resources.sh
 
 containers="$(docker container ls -a -q --filter="name=command-v*")"
 [[ -n "$containers" ]] && docker container rm $containers

@@ -22,6 +22,12 @@ Run all tests using [test-all.sh](test-all.sh)
 ./test-all.sh
 ```
 
+You can also list the already created containers without running a test:
+
+```bash
+./list.sh
+```
+
 Or delete everything with [reset.sh](reset.sh)
 
 ```bash
