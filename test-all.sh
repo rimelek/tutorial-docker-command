@@ -1,26 +1,28 @@
 #!/usr/bin/env bash
 
-./test.sh v1
-./test.sh v2
-./test.sh v3
-./test.sh v4
-./test.sh v5
-./test.sh v6
-./test.sh v7
-./test.sh v8
-./test.sh v9
-./test.sh v10
-./test.sh v11
+args=(
+  v1  'echo "Hello Docker"'
+  v2  'echo "Hello Docker"'
+  v3  'echo "Hello Docker"'
+  v4  '/hello.sh'
+  v5  '/hello.sh'
+  v6  'my friend'
+  v7  'my friend'
+  v8  'my friend'
+  v9  'my friend'
+  v10 'my friend'
+  v11 'my friend'
+)
 
+cd "$(dirname "$0")"
 
-./test.sh v1 'echo "$HOME"'
-./test.sh v2 'echo "$HOME"'
-./test.sh v3 'echo "$HOME"'
-./test.sh v4 '/hello.sh'
-./test.sh v5 '/hello.sh'
-./test.sh v6 'my friend'
-./test.sh v7 'my friend'
-./test.sh v8 'my friend'
-./test.sh v9 'my friend'
-./test.sh v10 'my friend'
-./test.sh v11 'my friend'
+# Run tests with and without arguments
+
+index=0
+
+while (( index < ${#args[@]} )); do
+  version="${args[$index]}"; (( ++index ))
+  arg="${args[$index]}";     (( ++index ))
+  SKIP_BUILD=0 ./test.sh $version
+  SKIP_BUILD=1 ./test.sh $version "$arg"
+done

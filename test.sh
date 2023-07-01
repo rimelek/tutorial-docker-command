@@ -13,11 +13,13 @@ stdout_tmp=$(mktemp)
 tag="localhost/$REPO_OWNER/$REPO_NAME:$version"
 container="$CONTAINER_NAME_PREFIX-$version-$([[ -n "$args" ]] && echo "1" || echo "0")"
 
-run "docker build . --force-rm -f Dockerfile.$version -t $tag \\
-  --build-arg \"SOURCE=$IMAGE_SOURCE\" \\
-  --build-arg \"REF_NAME=$IMAGE_REF_NAME\" \\
-  --build-arg \"VERSION=$version\"" || true
-echo
+if [[ "$SKIP_BUILD" != "1" ]]; then
+  run "docker build . --force-rm -f Dockerfile.$version -t $tag \\
+    --build-arg \"SOURCE=$IMAGE_SOURCE\" \\
+    --build-arg \"REF_NAME=$IMAGE_REF_NAME\" \\
+    --build-arg \"VERSION=$version\"" || true
+  echo
+fi
 
 if [[ -n "$(docker container ls -q -a --filter="name=^$container\$")" ]]; then
   if [[ "$IMAGE_SOURCE" == "$(docker container inspect "$container" --format '{{ index .Config.Labels "org.opencontainers.image.source" }}')" ]]; then

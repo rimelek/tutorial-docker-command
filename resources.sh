@@ -4,6 +4,7 @@ export REPO_NAME="tutorial-docker-command"
 
 export IMAGE_SOURCE="$REPO_BASE_URL/$REPO_OWNER/$REPO_NAME"
 export IMAGE_REF_NAME="localhost/$REPO_OWNER/$REPO_NAME"
+export SKIP_BUILD="${SKIP_BUILD:-0}"
 
 export CONTAINER_NAME_PREFIX="${CONTAINER_NAME_PREFIX:-command}"
 
