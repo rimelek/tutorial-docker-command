@@ -3,17 +3,17 @@
 This source code was created for a Hungarian [Youtube tutorial](https://youtu.be/KWyNaEUw3W8)
 It demonstrates how you can build the main process (the first process with 1 as PID) inside a Docker container using SHELL, ENTRYPOINT and CMD.
 
-Each Dockerfile has a version number. You can run the tests using [test.sh](test.sh) and passing the version as an argument:
+Each Dockerfile has a version number. You can run the tests one by one using [build.sh](build.sh) and [run.sh](run.sh) passing the version as the first argument to each script.
 
 ```bash
-./test.sh v1
-./test.sh v2
+./build.sh v1
+./run.sh v1
 ```
 
-Pass as command optionally as the second argument
+Pass a command optionally as the second argument
 
 ```bash
-./test.sh v1 'echo "Hello Docker"'
+./run.sh v1 'echo "Hello Docker"'
 ```
 
 Run all tests using [test-all.sh](test-all.sh)

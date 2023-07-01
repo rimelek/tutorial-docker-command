@@ -7,19 +7,8 @@ args="${2:-}"
 
 source ./resources.sh
 
-stderr_tmp=$(mktemp)
-stdout_tmp=$(mktemp)
-
-tag="localhost/$REPO_OWNER/$REPO_NAME:$version"
+tag="$IMAGE_REF_NAME:$version"
 container="$CONTAINER_NAME_PREFIX-$version-$([[ -n "$args" ]] && echo "1" || echo "0")"
-
-if [[ "$SKIP_BUILD" != "1" ]]; then
-  run "docker build . --force-rm -f Dockerfile.$version -t $tag \\
-    --build-arg \"SOURCE=$IMAGE_SOURCE\" \\
-    --build-arg \"REF_NAME=$IMAGE_REF_NAME\" \\
-    --build-arg \"VERSION=$version\"" || true
-  echo
-fi
 
 if [[ -n "$(docker container ls -q -a --filter="name=^$container\$")" ]]; then
   if [[ "$IMAGE_SOURCE" == "$(docker container inspect "$container" --format '{{ index .Config.Labels "org.opencontainers.image.source" }}')" ]]; then
@@ -31,6 +20,5 @@ if [[ -n "$(docker container ls -q -a --filter="name=^$container\$")" ]]; then
   fi
 fi
 
-run "docker run -i --name \"$container\" \"$tag\"" "${args}" || true
+run "docker run -i --name \"$container\" \"$tag\"" "${args}"
 
-echo

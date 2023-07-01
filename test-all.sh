@@ -23,6 +23,14 @@ index=0
 while (( index < ${#args[@]} )); do
   version="${args[$index]}"; (( ++index ))
   arg="${args[$index]}";     (( ++index ))
-  SKIP_BUILD=0 ./test.sh $version
-  SKIP_BUILD=1 ./test.sh $version "$arg"
+
+  err=0
+  ./build.sh $version || err=$?
+  echo
+  if (( $err == 0 )); then
+    ./run.sh $version || true
+    echo
+    ./run.sh $version "$arg" || true
+    echo
+  fi
 done
