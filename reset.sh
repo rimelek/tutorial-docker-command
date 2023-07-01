@@ -4,7 +4,7 @@ source ./resources.sh
 
 filter=(
   --filter
-  "label=org.opencontainers.image.source=$REPO_URL"
+  "label=org.opencontainers.image.source=$IMAGE_SOURCE"
 )
 
 containers="$(docker container ls -a -q "${filter[@]}")"
