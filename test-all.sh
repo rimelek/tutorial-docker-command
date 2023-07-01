@@ -34,3 +34,5 @@ while (( index < ${#args[@]} )); do
     echo
   fi
 done
+
+./list.sh
