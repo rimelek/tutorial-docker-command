@@ -52,8 +52,12 @@ function run() {
   [[ -n "${2:-}" ]] && command="$1 $2"
   info "$command"
   eval "$command" 1> $stdout_tmp 2> $stderr_tmp
+  err="$?"
   cat $stdout_tmp &> /dev/stdout
-  cat $stderr_tmp &> /dev/stderr
+  if (( $err != 0 )); then
+    cat $stderr_tmp &> /dev/stderr
+  fi
+  return $err
 }
 
 function runq() {
