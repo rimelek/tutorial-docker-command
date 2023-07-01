@@ -8,7 +8,20 @@ filter=(
 )
 
 containers="$(docker container ls -a -q "${filter[@]}")"
-[[ -n "$containers" ]] && docker container rm $containers
+
+echo "Removing containers..."
+if [[ -n "$containers" ]]; then
+  docker container rm $containers
+else
+  echo "There were no containers to remove"
+fi
+echo
 
 images="$(docker image ls -q "${filter[@]}" | uniq)"
-[[ -n "$images" ]] && docker image rm -f $images
+
+echo "Removing images..."
+if [[ -n "$images" ]]; then
+  docker image rm -f $images
+else
+  echo "There were no images to remove"
+fi
