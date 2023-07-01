@@ -2,8 +2,13 @@
 
 source ./resources.sh
 
-containers="$(docker container ls -a -q --filter="name=command-v*")"
+filter=(
+  --filter
+  "label=org.opencontainers.image.source=$REPO_URL"
+)
+
+containers="$(docker container ls -a -q "${filter[@]}")"
 [[ -n "$containers" ]] && docker container rm $containers
 
-images="$(docker image ls "$image:*" -q | uniq)"
+images="$(docker image ls -q "${filter[@]}" | uniq)"
 [[ -n "$images" ]] && docker image rm -f $images

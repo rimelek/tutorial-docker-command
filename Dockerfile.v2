@@ -1,3 +1,13 @@
 FROM ubuntu:22.04
 
 CMD "echo \"Hello Docker\""
+
+# META data
+
+ARG SOURCE
+ARG REF_NAME
+ARG VERSION
+
+LABEL org.opencontainers.image.source "${SOURCE:?}"
+LABEL org.opencontainers.image.ref.name "${REF_NAME:?}"
+LABEL org.opencontainers.image.version "${VERSION:?}"

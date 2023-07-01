@@ -7,3 +7,13 @@ RUN chmod +x /hello.sh
 SHELL ["/bin/bash", "-c"]
 
 CMD "/hello.sh"
+
+# META data
+
+ARG SOURCE
+ARG REF_NAME
+ARG VERSION
+
+LABEL org.opencontainers.image.source "${SOURCE:?}"
+LABEL org.opencontainers.image.ref.name "${REF_NAME:?}"
+LABEL org.opencontainers.image.version "${VERSION:?}"

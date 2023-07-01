@@ -1,4 +1,11 @@
-export image="localhost/command"
+export REPO_BASE_URL="https://github.com"
+export REPO_OWNER="rimelek"
+export REPO_NAME="tutorial-docker-command"
+
+export IMAGE_SOURCE="$REPO_BASE_URL/$REPO_OWNER/$REPO_NAME"
+export IMAGE_REF_NAME="localhost/$REPO_OWNER/$REPO_NAME"
+
+export CONTAINER_NAME_PREFIX="${CONTAINER_NAME_PREFIX:-command}"
 
 export FORMAT_NORMAL="0"
 export FORMAT_BOLD="1"
@@ -58,7 +65,7 @@ function container_inspect() {
   local stdout=""
   local stderr=""
   echo -e -n "$(
-    docker container ls -a --no-trunc --format "{{ json . }}" --filter "name=$1" \
+    docker container ls -a --no-trunc --format "{{ json . }}" --filter "name=^$1\$" \
       | jq \
           --arg w '\e[37m' \
           --arg c '\e[36m' \

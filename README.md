@@ -34,4 +34,8 @@ Or delete everything with [reset.sh](reset.sh)
 ./reset.sh
 ```
 
-**NOTE**: This script will delete container with a name starting with "command-v" and images which have names starting with "localhost/command:". Make sure you don't have any image or container that you don't want to delete.
+**NOTE**: This script will deletes containers and images created by the tests. It uses open container annotations to identify whether the container was created by this project and will fail if the required label is not found or the repository stored as image source is different. If you had an existing container with the same name (not likely), you can export an environment variable in your terminal to override the default container prefix which is "command":
+
+```bash
+export CONTAINER_NAME_PREFIX=mycommand
+```

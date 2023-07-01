@@ -13,9 +13,9 @@
 ./test.sh v11
 
 
-./test.sh v1 'echo "Hello Docker"'
-./test.sh v2 'echo "Hello Docker"'
-./test.sh v3 'echo "Hello Docker"'
+./test.sh v1 'echo "$HOME"'
+./test.sh v2 'echo "$HOME"'
+./test.sh v3 'echo "$HOME"'
 ./test.sh v4 '/hello.sh'
 ./test.sh v5 '/hello.sh'
 ./test.sh v6 'my friend'

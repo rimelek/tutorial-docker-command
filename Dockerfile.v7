@@ -9,3 +9,13 @@ SHELL ["/bin/bash", "-c"]
 ENTRYPOINT ["/hello.sh"]
 
 CMD ["my", "friend"]
+
+# META data
+
+ARG SOURCE
+ARG REF_NAME
+ARG VERSION
+
+LABEL org.opencontainers.image.source "${SOURCE:?}"
+LABEL org.opencontainers.image.ref.name "${REF_NAME:?}"
+LABEL org.opencontainers.image.version "${VERSION:?}"
