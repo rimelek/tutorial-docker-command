@@ -30,6 +30,8 @@ export BG_PURPLE="45"
 export BG_CYAN="46"
 export BG_WHITE="47"
 
+export INFO_COLOR="$FG_YELLOW"
+
 function color_inline() {
   local bg="${1:-}"
   local format="${2:-}"
@@ -45,7 +47,7 @@ function color() {
 }
 
 function info() {
-  color "" "$FORMAT_BOLD" "$FG_YELLOW" "$@"
+  color "" "$FORMAT_BOLD" "$INFO_COLOR" "$@"
 }
 
 function run() {

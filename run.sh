@@ -10,6 +10,8 @@ source ./resources.sh
 tag="$IMAGE_REF_NAME:$version"
 container="$CONTAINER_NAME_PREFIX-$version-$([[ -n "$args" ]] && echo "1" || echo "0")"
 
+export INFO_COLOR="$FG_GREEN"
+
 if [[ -n "$(docker container ls -q -a --filter="name=^$container\$")" ]]; then
   if [[ "$IMAGE_SOURCE" == "$(docker container inspect "$container" --format '{{ index .Config.Labels "org.opencontainers.image.source" }}')" ]]; then
     runq "docker container rm -f \"$container\""
