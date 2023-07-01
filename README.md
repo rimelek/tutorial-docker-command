@@ -10,7 +10,7 @@ Each Dockerfile has a version number. You can run the tests using [test.sh](test
 ./test.sh v2
 ```
 
-Pass as command optionally as the secnd argument
+Pass as command optionally as the second argument
 
 ```bash
 ./test.sh v1 'echo "Hello Docker"'
@@ -22,7 +22,7 @@ Run all tests using [test-all.sh](test-all.sh)
 ./test-all.sh
 ```
 
-You can also list the already created containers without running a test:
+You can also list the already created containers:
 
 ```bash
 ./list.sh

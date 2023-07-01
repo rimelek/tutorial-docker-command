@@ -32,5 +32,3 @@ fi
 run "docker run -i --name \"$container\" \"$tag\"" "${args}" || true
 
 echo
-
-./list.sh
