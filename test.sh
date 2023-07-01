@@ -12,7 +12,7 @@ stdout_tmp=$(mktemp)
 
 tag="$image:$version"
 container="command-$version-$([[ -n "$args" ]] && echo "1" || echo "0")"
-run "docker build --force-rm -f Dockerfile.$version -t $tag ." || true
+run "docker build . --force-rm -f Dockerfile.$version -t $tag" || true
 echo
 
 if [[ -n "$(docker container ls -q -a --filter="name=$container")" ]]; then
