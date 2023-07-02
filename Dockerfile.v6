@@ -6,9 +6,9 @@ RUN chmod +x /hello.sh
 
 SHELL ["/bin/bash", "-c"]
 
-ENTRYPOINT "/hello.sh"
+ENTRYPOINT /hello.sh
 
-CMD "my friend"
+CMD my friend
 
 # META data
 

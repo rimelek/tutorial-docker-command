@@ -6,7 +6,7 @@ RUN chmod +x /hello.sh
 
 SHELL ["/bin/bash", "-c"]
 
-CMD "/hello.sh"
+CMD /hello.sh
 
 # META data
 
