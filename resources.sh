@@ -10,8 +10,8 @@ export CONTAINER_NAME_PREFIX="${CONTAINER_NAME_PREFIX:-command}"
 
 export TESTS=(
   v1  'echo "My home is $HOME"'
-  v2  'echo "Hello Docker"'
-  v3  'echo "Hello Docker"'
+  v2  'echo "My home is $HOME"'
+  v3  'echo "My home is $HOME"'
   v4  '/hello.sh'
   v5  '/hello.sh'
   v6  'my friend'
