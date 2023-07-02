@@ -4,7 +4,7 @@ COPY src/hello.sh /
 
 RUN chmod +x /hello.sh
 
-SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/ls", "-l"]
 
 CMD /hello.sh
 
