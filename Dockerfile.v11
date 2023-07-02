@@ -1,12 +1,12 @@
 FROM ubuntu:22.04
 
-COPY src/hello-bash.sh /hello.sh
+COPY src/hello-bash.sh /
 
-RUN ["chmod", "+x", "/hello.sh"]
+RUN ["chmod", "+x", "/hello-bash.sh"]
 
 SHELL ["/bin/bash", "-c"]
 
-ENTRYPOINT ["/hello.sh"]
+ENTRYPOINT ["/hello-bash.sh"]
 
 CMD ["my", "friend"]
 
