@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+set -eu -o pipefail
+
 cd "$(dirname "$0")"
+
+source ./resources.sh
 
 # Run tests with and without arguments
 
