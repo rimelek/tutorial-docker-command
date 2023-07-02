@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 COPY src/hello.sh /
 
+# COPY --chmod is supported with buildkit instead of the below instruction
 RUN chmod +x /hello.sh
 
 CMD /hello.sh
