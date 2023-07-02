@@ -9,7 +9,7 @@ export SKIP_BUILD="${SKIP_BUILD:-0}"
 export CONTAINER_NAME_PREFIX="${CONTAINER_NAME_PREFIX:-command}"
 
 export TESTS=(
-  v1  'echo "Hello Docker"'
+  v1  'echo "My home is $HOME"'
   v2  'echo "Hello Docker"'
   v3  'echo "Hello Docker"'
   v4  '/hello.sh'
@@ -66,7 +66,7 @@ function info() {
 
 function run() {
   local command="$1"
-  local err
+  local err=0
   local stdout_tmp
   local stderr_tmp
 
@@ -76,8 +76,8 @@ function run() {
   stderr_tmp=$(mktemp)
   stdout_tmp=$(mktemp)
 
-  eval "$command" 1> $stdout_tmp 2> $stderr_tmp
-  err="$?"
+  eval "$command" 1> $stdout_tmp 2> $stderr_tmp || err=$?
+
   cat $stdout_tmp &> /dev/stdout
   if (( $err != 0 )); then
     cat $stderr_tmp &> /dev/stderr
