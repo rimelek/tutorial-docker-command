@@ -67,20 +67,25 @@ function info() {
 function run() {
   local command="$1"
   local err
+  local stdout_tmp
+  local stderr_tmp
+
   [[ -n "${2:-}" ]] && command="$1 $2"
   info "$command"
 
-  if [[ "${stdout_tmp:-}" != "" ]] && [[ "${stderr_tmp:-}" != "" ]]; then
-    eval "$command" 1> $stdout_tmp 2> $stderr_tmp
-    err="$?"
-    cat $stdout_tmp &> /dev/stdout
-    if (( $err != 0 )); then
-      cat $stderr_tmp &> /dev/stderr
-    fi
-    return $err
-  else
-    eval "$command"
+  stderr_tmp=$(mktemp)
+  stdout_tmp=$(mktemp)
+
+  eval "$command" 1> $stdout_tmp 2> $stderr_tmp
+  err="$?"
+  cat $stdout_tmp &> /dev/stdout
+  if (( $err != 0 )); then
+    cat $stderr_tmp &> /dev/stderr
   fi
+  unlink "$stderr_tmp"
+  unlink "$stdout_tmp"
+
+  return $err
 }
 
 function runq() {

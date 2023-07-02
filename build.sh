@@ -6,9 +6,6 @@ version="$1"
 
 source ./resources.sh
 
-stderr_tmp=$(mktemp)
-stdout_tmp=$(mktemp)
-
 tag="$IMAGE_REF_NAME:$version"
 
 run "docker build . --force-rm -f Dockerfile.$version -t $tag \\
