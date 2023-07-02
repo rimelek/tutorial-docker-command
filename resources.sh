@@ -16,10 +16,10 @@ export TESTS=(
   v5  '/hello.sh'
   v6  'my friend'
   v7  'my friend'
-  v8  'my friend'
-  v9  'my friend'
-  v10 'my friend'
-  v11 'my friend'
+  v8  'whoami'
+  v9  'whoami'
+  v10 'whoami'
+  v11 'whoami'
 )
 
 export FORMAT_NORMAL="0"
