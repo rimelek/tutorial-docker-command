@@ -8,7 +8,7 @@ SHELL ["/bin/bash", "-c"]
 
 ENTRYPOINT ["/hello-bash.sh"]
 
-CMD ["my", "friend"]
+CMD ["whoami"]
 
 # META data
 
