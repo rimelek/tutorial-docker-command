@@ -8,6 +8,20 @@ export SKIP_BUILD="${SKIP_BUILD:-0}"
 
 export CONTAINER_NAME_PREFIX="${CONTAINER_NAME_PREFIX:-command}"
 
+export TESTS=(
+  v1  'echo "Hello Docker"'
+  v2  'echo "Hello Docker"'
+  v3  'echo "Hello Docker"'
+  v4  '/hello.sh'
+  v5  '/hello.sh'
+  v6  'my friend'
+  v7  'my friend'
+  v8  'my friend'
+  v9  'my friend'
+  v10 'my friend'
+  v11 'my friend'
+)
+
 export FORMAT_NORMAL="0"
 export FORMAT_BOLD="1"
 export FORMAT_UNDERLINED="4"
@@ -77,9 +91,13 @@ function runq() {
 function container_inspect() {
   local stdout=""
   local stderr=""
+  local json
+  json="$(docker container ls -a --no-trunc --format "{{ json . }}" --filter "name=^$1\$")"
   echo -e -n "$(
-    docker container ls -a --no-trunc --format "{{ json . }}" --filter "name=^$1\$" \
-      | jq \
+      if [[ -z "$json" ]]; then
+        json="{\"Names\":\"$1\",\"Command\":\"\\\"\\\"\"}"
+      fi
+      echo "$json" | jq \
           --arg w '\e[37m' \
           --arg c '\e[36m' \
           --arg r '\e[31m' \
@@ -87,9 +105,11 @@ function container_inspect() {
           --arg e '\e[0m' \
           --raw-output '$c + .Names + $e + "||" + $w + (.Command | fromjson) + $e + "||"'
   )"
-  stdout="$(docker logs $1 2> /dev/null)"
-  stderr="$( (docker logs $1 1> /dev/null) 2> /dev/stdout )"
-  [[ -n "$stdout" ]] && color_inline "" "" "$FG_GREEN" "$stdout"
-  [[ -n "$stderr" ]] && color_inline "" "" "$FG_RED" "$stderr"
+  if [[ -n "$json" ]]; then
+    stdout="$(docker logs $1 2> /dev/null)"
+    stderr="$( (docker logs $1 1> /dev/null) 2> /dev/stdout )"
+    [[ -n "$stdout" ]] && color_inline "" "" "$FG_GREEN" "$stdout"
+    [[ -n "$stderr" ]] && color_inline "" "" "$FG_RED" "$stderr"
+  fi
   echo
 }
