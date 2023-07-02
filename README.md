@@ -1,6 +1,7 @@
 # Building the main process inside Docker container
 
-This source code was created for a Hungarian [Youtube tutorial](https://youtu.be/KWyNaEUw3W8)
+This source code was created for a Hungarian [Youtube tutorial](https://youtu.be/KWyNaEUw3W8).
+For english links, please check the release list or the latest version of this readme.
 It demonstrates how you can build the main process (the first process with 1 as PID) inside a Docker container using SHELL, ENTRYPOINT and CMD and how the RUN instruction is similar to the others.
 
 **Note:** The tutorial requires [jq](https://jqlang.github.io/jq/) and recent Bash version installed on your machine.
